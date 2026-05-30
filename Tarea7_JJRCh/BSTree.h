@@ -4,6 +4,7 @@
 #include <iostream>
 #include "BSTNode.h"
 #include "List.h"
+#include "LinkedList.h"
 
 using std::cout;
 

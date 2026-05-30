@@ -56,5 +56,54 @@ public:
 		delete elements;
 		return keys;
 	}
+
+	List<V>* getValues() {
+		List<V>* values = new LinkedList<V>();
+		List<Pair<K, V>>* elements = pairs->getElements();
+		elements->goToStart();
+		while (!elements->atEnd()) {
+			values->append(elements->getElement().value);
+			elements->next();
+		}
+		delete elements;
+		return values;
+	}
+
+	int getSize() {
+		return pairs->getSize();
+	}
+
+	void update(Dictionary<K, V>* D) {
+		List<K>* keys = D->getKeys();
+		keys->goToStart;
+		while (!keys->atEnd()) {
+			K key = keys->getElement();
+			V value = D->getValue(key);
+			if (contains(key))
+				setValue(key, value);
+			else
+				insert(key, value);
+			keys->next();
+		}
+	}
+
+	void zip(List<K>* keys, List<V> values) {
+		BSTree<Pair<K, V>>* newPairs = new BSTree<Pair<K, V>>();
+		if (keys->getSize() > values->getSize()) {
+			keys->goToStart();
+			values->goToStart;
+			while (!values->atEnd()) {
+				if (contains(keys->getElement()))
+					setValue(keys->getElement(), values->getElement());
+				else
+					newPairs->insert(Pair<K, V>(keys->getElement, values->getElement()));
+			}
+		}
+		keys->goToStart();
+		values->goToStart;
+		while (!keys->atEnd()) {
+			newPairs->insert(Pair<K, V>(keys->getElement, values->getElement()));
+		}
+	}
 };
 

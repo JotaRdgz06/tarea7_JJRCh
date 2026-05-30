@@ -190,10 +190,26 @@ public:
 		}
 	}
 
-	//min
+	int max() {
+		if (root == nullptr) {
+			throw runtime_error("Arbol vacio");
+		}
+		BSTNode<E>* current = root;
+		while (current->right != nullptr) {
+			current = current->right;
+		}
+		return current->element;
+	}
 
-	//max
-
-	//setElement
+	int min() {
+		if (root == nullptr) {
+			throw runtime_error("Arbol vacio");
+		}
+		BSTNode<E>* current = root;
+		while (current->left != nullptr) {
+			current = current->left;
+		}
+		return current->element;
+	}
 };
 

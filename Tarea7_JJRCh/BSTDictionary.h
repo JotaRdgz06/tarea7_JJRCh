@@ -36,5 +36,25 @@ public:
 			throw runtime_error("La llave no se encontró");
 		pairs->setElement(Pair<K, V>(key, value));
 	}
+
+	bool contains(K key) {
+		return pairs->contains(Pair<K, V>(key));
+	}
+
+	void clear() {
+		pairs->clear();
+	}
+
+	List<K>* getKeys() {
+		List<K>* keys = new LinkedList<K>();
+		List<Pair<K, V>>* elements = pairs->getElements();
+		elements->goToStart();
+		while (!elements->atEnd()) {
+			keys->append(elements->getElement().key);
+			elements->next();
+		}
+		delete elements;
+		return keys;
+	}
 };
 

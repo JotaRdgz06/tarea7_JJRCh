@@ -114,6 +114,7 @@ public:
 
 	void insert(E element) {
 		root = insertAux(root, element);
+		size++;
 	}
 
 	E find(E element) {
@@ -132,8 +133,8 @@ public:
 	E remove(E element) {
 		E result;
 		root = removeAux(root, element, &result);
-		return result;
 		size--;
+		return result;
 	}
 
 	bool contains(E element) {

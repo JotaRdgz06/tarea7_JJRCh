@@ -26,5 +26,15 @@ public:
 	V remove(K key) {
 		return pairs->remove(Pair<K, V>(key)).value;
 	}
+
+	V getValue(K key) {
+		return pairs->find(Pair<K, V>(key)).value;
+	}
+
+	void setValue(K key, V value) {
+		if (!contains(key))
+			throw runtime_error("La llave no se encontró");
+		*E oldElement = pairs->find(Pair<K, V>(key));
+	}
 };
 

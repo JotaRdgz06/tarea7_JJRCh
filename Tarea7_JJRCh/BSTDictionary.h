@@ -34,7 +34,7 @@ public:
 	void setValue(K key, V value) {
 		if (!contains(key))
 			throw runtime_error("La llave no se encontró");
-		*E oldElement = pairs->find(Pair<K, V>(key));
+		pairs->setElement(Pair<K, V>(key, value));
 	}
 };
 

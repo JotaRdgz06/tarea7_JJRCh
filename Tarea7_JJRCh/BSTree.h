@@ -174,6 +174,22 @@ public:
 		printAux(root);
 	}
 
+	void setElement(E element) {
+		if (!contains(element))
+			throw runtime_error("No se encontró el elemento");
+		BSTNode<E>* current = root;
+		while (current != nullptr) {
+			if (current->element == element) {
+				current->element = element;
+				return;
+			}
+			if (element < current->element)
+				current = current->left;
+			else
+				current = current->right;
+		}
+	}
+
 	//min
 
 	//max

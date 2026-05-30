@@ -87,22 +87,28 @@ public:
 		}
 	}
 
-	void zip(List<K>* keys, List<V> values) {
-		BSTree<Pair<K, V>>* newPairs = new BSTree<Pair<K, V>>();
+	void zip(List<K>* keys, List<V>* values) {
+		keys->goToStart();
+		values->goToStart();
 		if (keys->getSize() > values->getSize()) {
-			keys->goToStart();
-			values->goToStart;
 			while (!values->atEnd()) {
 				if (contains(keys->getElement()))
 					setValue(keys->getElement(), values->getElement());
 				else
-					newPairs->insert(Pair<K, V>(keys->getElement, values->getElement()));
+					newPairs->insert(Pair<K, V>(keys->getElement(), values->getElement()));
+				keys->next();
+				values->next();
 			}
 		}
-		keys->goToStart();
-		values->goToStart;
-		while (!keys->atEnd()) {
-			newPairs->insert(Pair<K, V>(keys->getElement, values->getElement()));
+		else {
+			while (!keys->atEnd()) {
+				if (contains(keys->getElement()))
+					setValue(keys->getElement(), values->getElement());
+				else
+					newPairs->insert(Pair<K, V>(keys->getElement(), values->getElement()));
+				keys->next();
+				values->next();
+			}
 		}
 	}
 };

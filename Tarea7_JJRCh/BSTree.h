@@ -155,7 +155,7 @@ public:
 	}
 
 	List<E>* getElements() {
-		List<E>* elements = new List<E>();
+		List<E>* elements = new LinkedList<E>();
 		getElementsAux(root, elements);
 		return elements;
 	}

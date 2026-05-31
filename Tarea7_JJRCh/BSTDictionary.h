@@ -113,7 +113,7 @@ public:
 	}
 
 	bool isEmpty() {
-		return pairs->getSize();
+		return pairs->isEmpty();
 	}
 
 	void print() {

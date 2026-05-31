@@ -44,6 +44,7 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 		case 1:
 			cout << "Ingrese la llave: ";
 			cin >> llave;
+			cin.ignore();
 			cout << "Ingrese el valor: ";
 			getline(cin, valor);
 			dict1->insert(llave, valor);
@@ -65,8 +66,9 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 		case 4:
 			cout << "Ingrese la llave: ";
 			cin >> llave;
+			cin.ignore();
 			cout << "Ingrese el nuevo valor: ";
-			cin >> valor;
+			getline(cin, valor);
 			dict1->setValue(llave, valor);
 			break;
 
@@ -78,11 +80,11 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 
 		case 6:
 			dict1->clear();
-			cout << "Diccionario vaciado." << endl;
+			cout << "Diccionario vaciado" << endl;
 			break;
 			
-		case 7:
-			List<int>*keys = dict1->getKeys();
+		case 7: {
+			List<int>* keys = dict1->getKeys();
 			cout << "Llaves: ";
 			keys->goToStart();
 			while (!keys->atEnd()) {
@@ -92,9 +94,9 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 			cout << endl;
 			delete keys;
 			break;
-
-		case 8:
-			List<string>*values = dict1->getValues();
+		}
+		case 8: {
+			List<string>* values = dict1->getValues();
 			cout << "Valores: ";
 			values->goToStart();
 			while (!values->atEnd()) {
@@ -102,6 +104,42 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 				values->next();
 			}
 			cout << endl;
+			delete values;
+			break;
+		}
+
+		case 9: {
+			dict1->update(dict2);
+			cout << "Diccionario actualizado: ";
+			dict1->print();
+			break;
+		}
+
+		case 10:
+			int tamañoLista;
+			int key;
+			string value;
+			cout << "Ingrese el tamaño de la lista: ";
+			cin >> tamañoLista;
+			List<int>* keys = new LinkedList<int>();
+			List<string>* values = new LinkedList<string>();
+			cout << "Ingrese " << tamañoLista << " llaves:";
+			for (int i = 0; i < tamañoLista; i++) {
+				cout << "Llave " << i << ": ";
+				cin >> key;
+				keys->append(key);
+			}
+			cout << "Ingrese " << tamañoLista << " valores:";
+			for (int i = 0; i < tamañoLista; i++) {
+				cout << "Valor " << i << ": ";
+				getline(cin, value);
+				values->append(value);
+			}
+
+			dict1->zip(keys, values);
+			cout << "Diccionario nuevo: ";
+			dict1->print();
+			delete keys;
 			delete values;
 			break;
 		}
@@ -135,13 +173,13 @@ int main() {
 		cout << menu();
 		cout << endl << "Ingrese una opción: ";
 		getline(cin, opcion);
-		while (!esNumero(opcion) || opcion < "1" || opcion > "11") {
+		while (!esNumero(opcion) || stoi(opcion) < 1 || stoi(opcion) > 11) {
 			cout << "Opción no válida, intente de nuevo" << endl;
 			cout << endl << menu() << endl;
 			cout << endl << "Ingrese una opción: ";
 			getline(cin, opcion);
-			opcionint = stoi(opcion);
 		}
+		opcionint = stoi(opcion);
 
 		string dicSelection;
 		cout << "Con cual diccionario quiere trabajar?\n";

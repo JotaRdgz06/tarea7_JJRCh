@@ -109,7 +109,8 @@ public:
 	}
 
 	~BSTree() {
-		clear();
+		if(root != nullptr)
+			clear();
 	}
 
 	void insert(E element) {

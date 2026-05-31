@@ -79,7 +79,7 @@ private:
 
 	void clearAux(BSTNode<E>* current) {
 		if (current == nullptr)
-			throw runtime_error("Tree is empty");
+			return;
 		clearAux(current->left);
 		clearAux(current->right);
 		delete current;
@@ -151,6 +151,8 @@ public:
 	}
 
 	void clear() {
+		if (root == nullptr)
+			throw runtime_error("Tree is empty");
 		clearAux(root);
 		root = nullptr;
 		size = 0;

@@ -48,19 +48,22 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 			cout << "Ingrese el valor: ";
 			getline(cin, valor);
 			dict1->insert(llave, valor);
+			cout << endl;
 			break;
 		case 2:
 			cout << "Ingrese la llave: ";
 			cin >> llave;
+			cin.ignore();
 			borrado = dict1->remove(llave);
-			cout << "se borró el valor: " << borrado;
+			cout << "se borró el valor: " << borrado << endl;
 			break;
 
 		case 3:
 			cout << "Ingrese la llave: ";
 			cin >> llave;
+			cin.ignore();
 			valor = dict1->getValue(llave);
-			cout << "Valor: " << valor;
+			cout << "Valor: " << valor << endl << endl;
 			break;
 
 		case 4:
@@ -75,7 +78,8 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 		case 5:
 			cout << "Llave: ";
 			cin >> llave;
-			cout << (dict1->contains(llave) ? "Sí existe" : "No existe") << endl;
+			cin.ignore();
+			cout << (dict1->contains(llave) ? "Sí existe" : "No existe") << endl << endl;
 			break;
 
 		case 6:
@@ -88,10 +92,12 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 			cout << "Llaves: ";
 			keys->goToStart();
 			while (!keys->atEnd()) {
-				cout << keys->getElement() << ", ";
+				cout << keys->getElement();
+				if (!keys->atEnd())
+					cout << ", ";
 				keys->next();
 			}
-			cout << endl;
+			cout << endl << endl;
 			delete keys;
 			break;
 		}
@@ -100,10 +106,12 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 			cout << "Valores: ";
 			values->goToStart();
 			while (!values->atEnd()) {
-				cout << values->getElement() << ", ";
+				cout << values->getElement();
+				if (!values->atEnd())
+					cout << ", ";
 				values->next();
 			}
-			cout << endl;
+			cout << endl << endl;
 			delete values;
 			break;
 		}
@@ -112,6 +120,7 @@ void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2
 			dict1->update(dict2);
 			cout << "Diccionario actualizado: ";
 			dict1->print();
+			cout << endl << endl;
 			break;
 		}
 
@@ -169,7 +178,7 @@ int main() {
 		cout << endl;
 		cout << "Diccionario 2: " << endl;
 		mostrarDiccionario(diccionario2);
-		cout << endl;
+		cout << endl << endl;
 		cout << menu();
 		cout << endl << "Ingrese una opción: ";
 		getline(cin, opcion);

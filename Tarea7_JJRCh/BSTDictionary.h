@@ -120,8 +120,11 @@ public:
 		List<Pair<K, V>>* elements = pairs->getElements();
 		elements->goToStart();
 		while (!elements->atEnd()) {
-			cout << elements->getElement().key << ": " << elements->getElement().value << ", ";
+			cout << elements->getElement().key << ": " << elements->getElement().value;
 			elements->next();
+			if (!elements->atEnd()) {
+				cout << ", ";
+			}
 		}
 		delete elements;
 	}

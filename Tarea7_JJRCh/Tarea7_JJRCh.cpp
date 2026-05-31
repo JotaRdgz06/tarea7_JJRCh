@@ -1,19 +1,30 @@
-// Tarea7_JJRCh.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
-
 #include <iostream>
+#include <stdexcept>
+#include <String>
+#include "BSTDictionary.h"
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using std::cout;
+using std::endl;
+using std::string;
+
+void mostrarDiccionario(BSTDictionary<int, string>* D) {
+	if (D->isEmpty()) {
+		cout << "El diccionario est� vac�o" << endl;
+		return;
+	}
+	D->print();
 }
 
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
+int main() {
+	BSTDictionary<int, string>* diccionario1 = new BSTDictionary<int, string>();
+	BSTDictionary<int, string>* diccionario2 = new BSTDictionary<int, string>();
+	string opcion;
+	do {
+		cout << "Diccionario 1: " << endl;
+		mostrarDiccionario(diccionario1);
+		cout << endl;
+		cout << "Diccionario 2: " << endl;
+		mostrarDiccionario(diccionario2);
+		cout << endl << endl;
+	} while (opcion != "");
+}

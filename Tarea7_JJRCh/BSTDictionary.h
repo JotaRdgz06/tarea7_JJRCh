@@ -111,5 +111,19 @@ public:
 			}
 		}
 	}
+
+	bool isEmpty() {
+		return pairs->getSize();
+	}
+
+	void print() {
+		List<Pair<K, V>>* elements = pairs->getElements();
+		elements->goToStart();
+		while (!elements->atEnd()) {
+			cout << elements->getElement().key << ": " << elements->getElement().value << ", ";
+			elements->next();
+		}
+		delete elements;
+	}
 };
 

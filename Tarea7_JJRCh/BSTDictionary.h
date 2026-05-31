@@ -75,7 +75,7 @@ public:
 
 	void update(Dictionary<K, V>* D) {
 		List<K>* keys = D->getKeys();
-		keys->goToStart;
+		keys->goToStart();
 		while (!keys->atEnd()) {
 			K key = keys->getElement();
 			V value = D->getValue(key);
@@ -95,7 +95,7 @@ public:
 				if (contains(keys->getElement()))
 					setValue(keys->getElement(), values->getElement());
 				else
-					newPairs->insert(Pair<K, V>(keys->getElement(), values->getElement()));
+					insert(keys->getElement(), values->getElement());
 				keys->next();
 				values->next();
 			}
@@ -105,7 +105,7 @@ public:
 				if (contains(keys->getElement()))
 					setValue(keys->getElement(), values->getElement());
 				else
-					newPairs->insert(Pair<K, V>(keys->getElement(), values->getElement()));
+					insert(keys->getElement(), values->getElement());
 				keys->next();
 				values->next();
 			}

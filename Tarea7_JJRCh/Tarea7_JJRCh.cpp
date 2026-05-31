@@ -10,6 +10,7 @@ using std::getline;
 using std::string;
 using std::cin;
 using std::stoi;
+using std::exception;
 
 void mostrarDiccionario(BSTDictionary<int, string>* D) {
 	if (D->isEmpty()) {
@@ -34,8 +35,80 @@ string menu() {
 	return result;
 }
 
-void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2, string opcion) {
+void accion(BSTDictionary<int, string>* dict1, BSTDictionary<int, string>* dict2, int opcionint) {
+	int llave;
+	string valor;
+	string borrado;
+	try {
+		switch (opcionint) {
+		case 1:
+			cout << "Ingrese la llave: ";
+			cin >> llave;
+			cout << "Ingrese el valor: ";
+			getline(cin, valor);
+			dict1->insert(llave, valor);
+			break;
+		case 2:
+			cout << "Ingrese la llave: ";
+			cin >> llave;
+			borrado = dict1->remove(llave);
+			cout << "se borró el valor: " << borrado;
+			break;
 
+		case 3:
+			cout << "Ingrese la llave: ";
+			cin >> llave;
+			valor = dict1->getValue(llave);
+			cout << "Valor: " << valor;
+			break;
+
+		case 4:
+			cout << "Ingrese la llave: ";
+			cin >> llave;
+			cout << "Ingrese el nuevo valor: ";
+			cin >> valor;
+			dict1->setValue(llave, valor);
+			break;
+
+		case 5:
+			cout << "Llave: ";
+			cin >> llave;
+			cout << (dict1->contains(llave) ? "Sí existe" : "No existe") << endl;
+			break;
+
+		case 6:
+			dict1->clear();
+			cout << "Diccionario vaciado." << endl;
+			break;
+			
+		case 7:
+			List<int>*keys = dict1->getKeys();
+			cout << "Llaves: ";
+			keys->goToStart();
+			while (!keys->atEnd()) {
+				cout << keys->getElement() << ", ";
+				keys->next();
+			}
+			cout << endl;
+			delete keys;
+			break;
+
+		case 8:
+			List<string>*values = dict1->getValues();
+			cout << "Valores: ";
+			values->goToStart();
+			while (!values->atEnd()) {
+				cout << values->getElement() << ", ";
+				values->next();
+			}
+			cout << endl;
+			delete values;
+			break;
+		}
+	}
+	catch (const exception& e) {
+		cout << "Error: " << e.what() << "\n";
+	}
 }
 
 bool esNumero(string& tam) {
@@ -51,6 +124,7 @@ int main() {
 	BSTDictionary<int, string>* diccionario1 = new BSTDictionary<int, string>();
 	BSTDictionary<int, string>* diccionario2 = new BSTDictionary<int, string>();
 	string opcion;
+	int opcionint;
 	do {
 		cout << "Diccionario 1: " << endl;
 		mostrarDiccionario(diccionario1);
@@ -66,6 +140,7 @@ int main() {
 			cout << endl << menu() << endl;
 			cout << endl << "Ingrese una opción: ";
 			getline(cin, opcion);
+			opcionint = stoi(opcion);
 		}
 
 		string dicSelection;
@@ -83,9 +158,9 @@ int main() {
 		}
 
 		if (dicSelection == "1")
-			accion(diccionario1, diccionario2, opcion);
+			accion(diccionario1, diccionario2, opcionint);
 		else {
-			accion(diccionario2, diccionario1, opcion);
+			accion(diccionario2, diccionario1, opcionint);
 		}
 	} while (opcion != "11");
 	delete diccionario1;
